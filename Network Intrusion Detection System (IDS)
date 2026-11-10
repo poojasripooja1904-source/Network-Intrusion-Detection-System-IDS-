@@ -1,0 +1,35 @@
+
+print("================================")
+print(" NETWORK INTRUSION DETECTION ")
+print("================================")
+
+network_logs = [
+    "192.168.1.10 - Login Success",
+    "192.168.1.20 - Login Failed",
+    "192.168.1.20 - Login Failed",
+    "192.168.1.20 - Login Failed",
+    "192.168.1.30 - Login Success",
+    "192.168.1.40 - Login Failed"
+]
+
+failed_attempts = {}
+
+for log in network_logs:
+    print("Monitoring:", log)
+
+    ip = log.split()[0]
+
+    if "Login Failed" in log:
+        failed_attempts[ip] = failed_attempts.get(ip, 0) + 1
+
+        if failed_attempts[ip] >= 3:
+            print("ALERT! Suspicious activity detected from", ip)
+
+print("\n================================")
+print("       SECURITY REPORT")
+print("================================")
+
+for ip, count in failed_attempts.items():
+    print(ip, "Failed Attempts:", count)
+
+print("\nMonitoring Completed!")
